@@ -7,45 +7,84 @@ private:
 	int numerator_;
 	int denominator_;
 public:
-
 	Fraction(int numerator, int denominator)
 	{
 		numerator_ = numerator;
-		denominator_ = denominator;
+		denominator_= denominator;
 
 	}
+	
 	int multiplyFirstCross(Fraction other) { return numerator_ * other.denominator_; }
 	int multiplySecondCross(Fraction other) { return other.numerator_ * denominator_; }
 
 	Fraction operator+(Fraction other) 
 	{ 
-		return Fraction(multiplyFirstCross(other) + multiplySecondCross(other), denominator_ * other.denominator_); 
+		std::string operation = " + ";
+		int result_num = multiplyFirstCross(other) + multiplySecondCross(other);
+		int result_den = denominator_ * other.denominator_;
+		printOperation(operation, numerator_, denominator_, other.numerator_, other.denominator_, result_num, result_den);
+		return Fraction(result_num, result_den); 
 	}
 	Fraction operator-(Fraction other) 
 	{ 
-		return Fraction(multiplyFirstCross(other) - multiplySecondCross(other), denominator_ * other.denominator_); 
+		std::string operation = " - ";
+		int result_num = multiplyFirstCross(other) - multiplySecondCross(other);
+		int result_den = denominator_ * other.denominator_;
+		printOperation(operation, numerator_, denominator_, other.numerator_, other.denominator_, result_num, result_den);
+		return Fraction(result_num, result_den); 
 	}
 	Fraction operator*(Fraction other) 
 	{
-		std::cout << numerator_ << "/" << denominator_ << " * " << other.numerator_ << "/" << other.denominator_ << " = ";
 		int divisor = std::gcd(numerator_ * other.numerator_, denominator_ * other.denominator_);
-		return Fraction((numerator_ * other.numerator_)/divisor, (denominator_ * other.denominator_)/divisor); 
+		int result_num = (numerator_ * other.numerator_) / divisor;
+		int result_den = (denominator_ * other.denominator_) / divisor;
+		std::string operation = " * ";
+		printOperation(operation, numerator_, denominator_, other.numerator_, other.denominator_, result_num, result_den);
+		return Fraction(result_num, result_den); 
 	}
 	Fraction operator/(Fraction other)
 	{
 		int divisor = std::gcd(numerator_ * other.denominator_, denominator_ * other.numerator_);
-		return Fraction((numerator_ * other.denominator_) / divisor, (denominator_ * other.numerator_) / divisor);
+		int result_num = (numerator_ * other.denominator_) / divisor;
+		int result_den = (denominator_ * other.numerator_) / divisor;
+		std::string operation = " / ";
+		printOperation(operation, numerator_, denominator_, other.numerator_, other.denominator_, result_num, result_den);
+		return Fraction(result_num, result_den);
 	}
 
 	Fraction operator-() { return Fraction(numerator_ * -1, denominator_);}
-	Fraction operator++() { std::cout << "++"; return Fraction(numerator_ + denominator_, denominator_); }
-	Fraction operator++(int) { std::cout << "++"; return Fraction(numerator_ + denominator_, denominator_); }
-	Fraction operator--() { std::cout << "--"; return Fraction(--numerator_, --denominator_); }
-	Fraction operator--(int) { std::cout << "--"; return Fraction(numerator_--, denominator_--); }
+	Fraction operator++() 
+	{ 
+		return Fraction(numerator_ + denominator_, denominator_); 
+	}
+	Fraction operator++(int) 
+	{ 
+		numerator_ = numerator_ + denominator_;
+		return Fraction(numerator_ - denominator_, denominator_); 
+	}
+	Fraction operator--() 
+	{ 
+		return Fraction(numerator_ - denominator_, denominator_);
+	}
+	Fraction operator--(int) 
+	{ 
+		numerator_ = numerator_ - denominator_;
+		return Fraction(numerator_ + denominator_, denominator_);
+	}
 
-	void printFraction()
+	void printFraction(int numerator_, int denominator_)
 	{
-		std::cout << numerator_ << "/" << denominator_ << std::endl;
+		std::cout << numerator_ << "/" << denominator_;
+	}
+	void printOperation(std::string operation, int num1, int den1, int num2, int den2, int res_num, int res_den)
+	{
+		printFraction(num1, den1);
+		std::cout << operation;
+		printFraction(num2, den2);
+		std::cout << " = ";
+		printFraction(res_num, res_den);
+		std::cout << std::endl;
+
 	}
 };
 
@@ -78,7 +117,6 @@ int main()
 	sub_f1_f2.printFraction();*/
 
 	Fraction mult_f1_f2 = ++f1 * f2;
-	mult_f1_f2.printFraction();
 	
 	/*Fraction div_f1_f2 = -f1 / f2;
 	div_f1_f2.printFraction();
