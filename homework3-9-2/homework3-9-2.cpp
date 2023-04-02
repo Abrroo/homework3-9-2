@@ -15,7 +15,7 @@ public:
 		flag_ = 0;
 
 	}
-	
+
 	int multiplyFirstCross(Fraction other) { return numerator_ * other.denominator_; }
 	int multiplySecondCross(Fraction other) { return other.numerator_ * denominator_; }
 
@@ -91,6 +91,12 @@ public:
 	{
 		std::cout << numerator_ << "/" << denominator_;
 	}
+
+	void wipe()
+	{
+		this->flag_ = 0;
+	}
+
 	void printOperation(std::string operation, int num1, int den1, int flag1, int num2, int den2, int flag2, int res_num, int res_den)
 	{
 		if (flag1 == 2) { std::cout << "++"; }
@@ -107,9 +113,22 @@ public:
 		std::cout << " = ";
 		printFraction(res_num, res_den);
 		std::cout << std::endl;
+		//flag1 = 0;
+		//flag2 = 0;
 
 	}
 };
+
+void printData(Fraction f1, Fraction f2)
+{
+	std::cout << "Значение дроби 1: ";
+	f1.printFraction();
+	std::cout << std::endl;
+	std::cout << "Значение дроби 2: ";
+	f2.printFraction();
+	std::cout << std::endl;
+	std::cout << std::endl;
+}
 
 int main()
 {
@@ -132,21 +151,16 @@ int main()
 	//Fraction f2(num2, den2);
 	
 	Fraction f1(3, 4);
-	Fraction f2(4, 5);
-	
-	
-
+	Fraction f2(3, 4);
 
 	//Fraction summ_f1_f2 = f1 + f2;
 	//Fraction sub_f1_f2 = f1 - f2;
-	Fraction mult_f1_f2 = f1++ * f2;
-	std::cout << "Значение дроби 1: ";
-	f1.printFraction();
-	std::cout << std::endl;
-	std::cout << "Значение дроби 2: ";
-	f2.printFraction();
-	std::cout << std::endl;
-	//Fraction div_f1_f2 = -f1 / f2;
+	Fraction mult_f1_f2 = f1++ * ++f2;
+	printData(f1, f2);
+	f1.wipe();
+	f2.wipe();
+	Fraction div_f1_f2 = f1 / f2++;
+	printData(f1, f2);
 	//Fraction mult_f1_f2_v1 = ++f1 * f2;
 	//Fraction mult_f1_f2_v2 = f1++ * f2;
 	
