@@ -137,21 +137,21 @@ int main()
 	
 	int num1, num2, den1, den2;
 
-	//std::cout << "Введите числитель дроби 1: ";
-	//std::cin >> num1;
-	//std::cout << "Введите знаменатель дроби 1: ";
-	//std::cin >> den1;
-	//std::cout << "Введите числитель дроби 2: ";
-	//std::cin >> num2;
-	//std::cout << "Введите знаменатель дроби 2: ";
-	//std::cin >> den2;
-	//std::cout << std::endl;
+	std::cout << "Введите числитель дроби 1: ";
+	std::cin >> num1;
+	std::cout << "Введите знаменатель дроби 1: ";
+	std::cin >> den1;
+	std::cout << "Введите числитель дроби 2: ";
+	std::cin >> num2;
+	std::cout << "Введите знаменатель дроби 2: ";
+	std::cin >> den2;
+	std::cout << std::endl;
 
-	//Fraction f1(num1, den1);
-	//Fraction f2(num2, den2);
+	Fraction f1(num1, den1);
+	Fraction f2(num2, den2);
 	
-	Fraction f1(3, 4);
-	Fraction f2(3, 4);
+	//Fraction f1(3, 4);
+	//Fraction f2(3, 4);
 
 	//Fraction summ_f1_f2 = f1 + f2;
 	//Fraction sub_f1_f2 = f1 - f2;
